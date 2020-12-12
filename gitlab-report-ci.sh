@@ -73,7 +73,7 @@ upload_file() {
          --form "commit_message=New report" \
          --form "start_branch=master" \
          --form "actions[][action]=$1" \
-         --form "actions[][file_path]=$2" \
+         --form "actions[][file_path]=report/${CI_PROJECT_PATH:-ci}/${CI_COMMIT_BRANCH:-main}/$(basename "$2")" \
          --form "actions[][content]=<$2" \
          --header "PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}" \
          -fsSL "${GITLAB_PROJECT_API_URL}/${GITLAB_REPORT_STORE//\//%2F}/repository/commits"
